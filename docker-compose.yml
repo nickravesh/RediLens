@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  django:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://host.docker.internal:6379
+      - DJANGO_SECRET_KEY=your-secret-key
+      - METRICS_COLLECTION_INTERVAL=30
+      - METRICS_RETENTION_DAYS=7
+    volumes:
+      - .:/app
+      - ./db.sqlite3:/app/db.sqlite3
