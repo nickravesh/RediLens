@@ -27,12 +27,16 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-default-key-fo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:5173',
+# ]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -138,5 +143,5 @@ REST_FRAMEWORK = {
 
 # Custom settings
 REDIS_URL = config('REDIS_URL', default='redis://localhost:6379')
-METRICS_COLLECTION_INTERVAL = config('METRICS_COLLECTION_INTERVAL', default=30, cast=int)
+METRICS_COLLECTION_INTERVAL = config('METRICS_COLLECTION_INTERVAL', default=3, cast=int)
 METRICS_RETENTION_DAYS = config('METRICS_RETENTION_DAYS', default=7, cast=int)
